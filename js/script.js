@@ -18,3 +18,39 @@ resumeBtns.forEach((btn, idx) => {
         }
     });
 });
+
+
+const arrowRight = document.querySelector('.portfolio-box .navigation .arrow-right');
+const arrowLeft = document.querySelector('.portfolio-box .navigation .arrow-left');
+
+let index = 0;
+
+const activePortfolio = () => {
+    const imgSlide = document.querySelector('.portfolio-carousel .img-slide');
+
+    imgSlide.style.transform = `translateX(${(-index * 100)}%)`;
+}
+
+arrowRight.addEventListener('click', () => {
+    if (index < 4) {
+        index++;
+        arrowLeft.classList.remove('disabled');
+    } else {
+        index = 5;
+        arrowRight.classList.add('disabled');
+        // Loop back to the first item if you are at the end
+    }
+    activePortfolio();
+});
+
+arrowLeft.addEventListener('click', () => {
+    if (index > 1) {
+        index--;
+        arrowRight.classList.remove('disabled');
+    } else {
+        index = 0
+        arrowLeft.classList.add('disabled');
+     // Loop back to the last item if you are at the start
+    }
+    activePortfolio();
+});
