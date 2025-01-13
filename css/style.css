@@ -40,7 +40,21 @@ header{
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-}   
+    visibility: hidden;
+    opacity: 0;
+}
+
+header.active{
+    animation: show-header 1.5s linear forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes show-header{
+    100%{
+        visibility: visible;
+        opacity: 1;
+    }
+}
 
 .logo{
     font-size: 3rem;
@@ -68,21 +82,70 @@ nav a.active{
 }
 
 
+/* bars section */
+
+.bars-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.bars-box .bar{
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    animation: hide-bar .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes hide-bar{
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-100%);
+    }
+    
+}
+
+.bars-box.active .bar{
+    animation: show-bar .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes show-bar{
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+    
+}
+
 section{
    position: absolute;
    width: 100%;
    height: 100%;
    padding: 10rem 9% 2rem;
-   background: var(--bg-color);
+   /* background: var(--bg-color); */
    visibility: hidden;
    opacity: 0;
    overflow: hidden;
 }
 
 section.active{
-    visibility: visible;
-    opacity: 1;
-    overflow: auto;
+    animation: show-content 1.5s linear forwards;
+    animation-delay: 1.6s;
+}
+
+@keyframes show-content {
+    100%{
+        visibility: visible;
+        opacity: 1;
+        overflow: auto;
+    }
 }
 
 .home{
@@ -261,7 +324,7 @@ section.active{
 
 .services-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(3, minmax(30rem, 1fr));
     gap: 2rem;
 }
 
@@ -331,7 +394,7 @@ background: var(--main-color);
     /* line-height: 2; */
 }
 
-/* Service Container */
+/* Resume Container */
 
 .resume-container{
     display: grid;
@@ -678,7 +741,7 @@ background: var(--main-color);
     font-size: 3rem;
     padding: 1.2rem;
     border-radius: .6rem;
-    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 }
 
 .contact-details .details p:first-child{
@@ -701,3 +764,159 @@ background: var(--main-color);
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 }
+
+.contact-box .field-box input,
+.contact-box .field-box textarea{
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border: .15rem solid var(--bg-color);
+    border-radius: .6rem;
+    font-size: 1.6rem;
+    color: var(--white-color);
+}
+
+.contact-box .field-box textarea{
+    grid-column: 1/-1;
+    height: 26rem;
+    resize: none;
+}
+
+
+.contact-box .field-box input:focus,
+.contact-box .field-box textarea:focus{
+    border-color: var(--main-color);
+}
+
+.contact-box .btn{
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+/* breakpoints */
+
+@media screen and (max-width: 1200px) {
+    html{
+        font-size: 55%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    header{
+        padding: 2rem 4%;
+    }
+
+    section{
+        padding: 10rem 4% 2rem;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .contact-box .field-box{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+   #menu-icon{
+       display: block;
+   }
+
+   nav{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    background: var(--bg-color);
+    border-top: .1rem solid rgba(0, 0, 0, .2);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    text-align: center;
+    display: none;
+   }
+
+    nav.active{
+         display: block;
+    }
+
+   nav a{
+         display: block;
+         margin: 4rem 0;
+   }
+
+   .home {
+         flex-direction: column-reverse;
+         justify-content: center;
+         gap: 2rem;
+   }
+
+   .home-img .img-box{
+         width: 35rem;
+         height: 35rem;
+   }
+
+   .resume-container,
+    .portfolio-container,
+    .contact-container{
+        grid-template-columns: 1fr;
+    }
+
+    .resume-container{
+        gap: 3rem;
+    }
+
+    .portfolio-container .portfolio-box{
+        order: 1;
+    }
+
+    .portfolio-container .portfolio-box:first-child{
+        order: 2;
+    }
+
+    .contact-box .field-box{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home-img .img-box{
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .contact-box .field-box{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 450px){
+    html{
+        font-size: 50%;
+    }
+}
+
+
+@media screen and (max-width: 400px){
+    .home-details,
+    .resume-box h2,
+    .resume-box .heading,
+    .resume-box .desc,
+    .resume-details.about .resume-item {
+        text-align: center;
+    }
+    .home-details .btn-sci{
+        flex-direction: column-reverse;
+    }
+    .home-details .btn-sci .sci{
+        margin-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .contact-box form{
+        padding: 2.5rem 3rem 3.5rem;
+    }
+
+    .contact-box h2{
+        font-size: 3.5rem;
+    }
+}
+
