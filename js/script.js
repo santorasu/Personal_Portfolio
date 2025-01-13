@@ -27,30 +27,34 @@ let index = 0;
 
 const activePortfolio = () => {
     const imgSlide = document.querySelector('.portfolio-carousel .img-slide');
+    const portfolioDetails = document.querySelectorAll('.portfolio-details');
 
-    imgSlide.style.transform = `translateX(${(-index * 100)}%)`;
+    imgSlide.style.transform = `translateX(calc(${index * -100}% - ${index * 2}rem))`;
+
+    portfolioDetails.forEach(detail => {
+        detail.classList.remove('active');
+    });
+    portfolioDetails[index].classList.add('active');
 }
 
 arrowRight.addEventListener('click', () => {
-    if (index < 4) {
+    if (index < 5) {
         index++;
         arrowLeft.classList.remove('disabled');
-    } else {
-        index = 5;
+    } 
+    if (index === 5) {
         arrowRight.classList.add('disabled');
-        // Loop back to the first item if you are at the end
     }
     activePortfolio();
 });
 
 arrowLeft.addEventListener('click', () => {
-    if (index > 1) {
+    if (index > 0) {
         index--;
         arrowRight.classList.remove('disabled');
-    } else {
-        index = 0
+    }
+    if (index === 0) {
         arrowLeft.classList.add('disabled');
-     // Loop back to the last item if you are at the start
     }
     activePortfolio();
 });
