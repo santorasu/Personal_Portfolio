@@ -886,12 +886,17 @@ background: var(--main-color);
     .contact-box .field-box{
         grid-template-columns: 1fr;
     }
+
+    .services-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 450px){
     html{
         font-size: 50%;
     }
+
 }
 
 
@@ -918,5 +923,15 @@ background: var(--main-color);
     .contact-box h2{
         font-size: 3.5rem;
     }
+
+    .services-container{
+        grid-template-columns: 1fr;
+    }
 }
 
+
+/* .services-container{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(30rem, 1fr));
+    gap: 2rem;
+} */
